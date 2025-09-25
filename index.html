@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Card for My Everything</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styling for the body */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fce3e8 0%, #ebc7d6 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+            overflow-x: hidden;
+            flex-direction: column;
+        }
+
+        /* Card container animation and shadow */
+        .card-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            animation: fadeIn 1.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Heart pulse animation */
+        .heart-pulse {
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Message and signature fonts */
+        .message-content {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.25rem;
+            line-height: 2;
+            color: #4a5568;
+            text-align: left;
+            margin-top: 1.5rem;
+            font-weight: 400;
+        }
+
+        .message-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .signature {
+            font-size: 1.75rem;
+            color: #ef4444;
+            margin-top: 2rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Image container and animation */
+        .image-container {
+            width: 100%;
+            padding-top: 75%; /* 4:3 Aspect Ratio */
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            animation: imageFadeIn 2s forwards;
+        }
+
+        .image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes imageFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 640px) {
+            .card-container {
+                padding: 1.5rem;
+            }
+            .message-content {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+        }
+
+        /* Decorative heart animation */
+        .heart-decoration {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: #ef4444;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            animation: heart-beat 1.5s infinite ease-in-out;
+            opacity: 0.8;
+            z-index: -1;
+        }
+        .heart-decoration::before, .heart-decoration::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ef4444;
+        }
+        .heart-decoration::before {
+            top: -15px;
+            left: 0;
+        }
+        .heart-decoration::after {
+            top: 0;
+            left: 15px;
+        }
+
+        @keyframes heart-beat {
+            0% { transform: translate(-50%, -50%) rotate(-45deg) scale(0.8); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) rotate(-45deg) scale(1.1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) rotate(-45deg) scale(0.8); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card-container">
+    <div class="heart-decoration"></div>
+
+    <!-- Image for the card. You can replace this placeholder with your own image URL. -->
+    <div class="image-container">
+        <img src="My.jpg" alt="A beautiful image of a couple in a loving pose.">
+    </div>
+    
+    <!-- Title and message content -->
+    <div class="ribbon text-4xl font-bold text-pink-600 mb-4 font-['Dancing Script'] heart-pulse">
+        Happy Birthday
+    </div>
+    <div class="text-3xl font-bold text-gray-800 mb-8">My Everything</div>
+
+    <div class="message-content">
+        <p>Jaise-jaise yeh waqt aur lamhe aage badhte gaye, waise waise tumse mera pyaar aur gehra hota gaya। Thank you, Krishna, jo tum meri zindagi mein aai। Tumne aakar mujhe adhoora se poora kar diya। Tumhe paake aisa lagta hai jaise ab zindagi chahe jaaisi bhi ho, bas tum ho toh sab kuch khubsurat hai।</p>
+        <p>Humne saath mein ladte-jhagadte, muskurate-rote hue apne rishte ko ek shape diya hai। Hamara pyaar hi hai jo isse mazboot banaya hai।</p>
+        <p>Kaash main tumhe abhi gale se laga pata aur keh pata ki “tumhari saansein jahan chalengi, wahan hi mujhe rehna hai।” Har mulaqat tumse ek haseen yaad ban jaati hai, aur tumhari muskaan meri zindagi ki sabse khoobsurat chiz hai।</p>
+        <p>Thank you meri jaan, mujhe jaise gadhe se pyaar karne ke liye। Tumne sirf mere dil mein ghar hi nahi banaya, balki ek mahal basa liya hai jahan tum humesha meri raani banke rehti ho।</p>
+        <p>Duniya mein kuch bhi ho jaye, par jab main tumhare paas hota hoon toh lagta hai jaise ghar aagya hoon। Tumhari chhoti chhoti badmashiyan aur tumhari muskaan mere saare gham khatm krdeti hai।</p>
+        <p>Kaash abhi tum meri bahon mein hoti aur main dheere-dheere tumhe apne kareeb khinch leta, bss khoya rehta tum mein। Sirf tum aur main, aur koi nahi।</p>
+        <p>Main tumhe aur kaise bataun ki main tumhe kitna chahta hoon? Tum meri nigahon mein, mere khaylon mein mere dil ki dhadkanon mein ho har pal mein ho, har soch tumse hi shuru hoti hai aur tumse hi khatam।</p>
+        <p>Mera dil pagala sa gaya hai jo sirf tumhara naam hi leta hai…</p>
+        <p class="text-3xl font-bold md:text-4xl text-center text-pink-600 my-4">“आराधना…आराधना…”💕</p>
+        <p>Bas tum meri nazron ke samne raho, toh mujhe aur kuch nahi chahiye। Tum meri duniya ho, meri dil ki awaz ho, meri muskaan, meri dhadkan।</p>
+        <p>Hum dono ek dusre k liye bane hai।</p>
+    </div>
+    
+    <div class="signature">
+        <p>Happy Birthday once again, meri आराधना। Tum meri humesha mere dil mein rahogi।</p>
+    </div>
+</div>
+
+</body>
+</html>
