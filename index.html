@@ -1,198 +1,292 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Card for My Everything</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Base styling for the body */
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #fce3e8 0%, #ebc7d6 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 1rem;
-            overflow-x: hidden;
-            flex-direction: column;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Card for My Everything</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(-45deg, #fce3e8, #fcd4e1, #f6e0ff, #ffe4f0);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+  position: relative;
+}
 
-        /* Card container animation and shadow */
-        .card-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            background: #fff;
-            border-radius: 2rem;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            padding: 2.5rem 2rem;
-            text-align: center;
-            opacity: 0;
-            transform: scale(0.95) translateY(20px);
-            animation: fadeIn 1.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
+.card-container {
+  width: 100%;
+  max-width: 650px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 2rem;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  margin: auto;
+  animation: fadeIn 1.5s forwards;
+  position: relative;
+  z-index: 1;
+}
 
-        /* Heart pulse animation */
-        .heart-pulse {
-            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
-        }
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(20px) scale(0.95);}
+  to {opacity:1; transform: translateY(0) scale(1);}
+}
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
+.image-slider {
+  position: relative;
+  width: 100%;
+  padding-top: 70%;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  margin-bottom: 2rem;
+}
 
-        /* Message and signature fonts */
-        .message-content {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.25rem;
-            line-height: 2;
-            color: #4a5568;
-            text-align: left;
-            margin-top: 1.5rem;
-            font-weight: 400;
-        }
+.image-slider img {
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  object-fit: cover;
+  opacity:0;
+  transition: opacity 1.5s ease-in-out;
+  border-radius: 1.5rem;
+}
 
-        .message-content p {
-            margin-bottom: 1.5rem;
-        }
+.image-slider img.active {
+  opacity:1;
+}
 
-        .signature {
-            font-size: 1.75rem;
-            color: #ef4444;
-            margin-top: 2rem;
-            font-family: 'Dancing Script', cursive;
-        }
+.message-content {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  line-height: 2;
+  color: #444;
+  text-align: left;
+  margin-top: 1.5rem;
+}
 
-        /* Image container and animation */
-        .image-container {
-            width: 100%;
-            padding-top: 75%; /* 4:3 Aspect Ratio */
-            position: relative;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-            animation: imageFadeIn 2s forwards;
-        }
+.message-content p {
+  margin-bottom: 1.3rem;
+  opacity: 0;
+  animation: fadeInUp 1.2s forwards;
+}
 
-        .image-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.message-content p:nth-child(1){animation-delay:0.2s;}
+.message-content p:nth-child(2){animation-delay:0.6s;}
+.message-content p:nth-child(3){animation-delay:1s;}
+.message-content p:nth-child(4){animation-delay:1.4s;}
+.message-content p:nth-child(5){animation-delay:1.8s;}
+.message-content p:nth-child(6){animation-delay:2.2s;}
+.message-content p:nth-child(7){animation-delay:2.6s;}
+.message-content p:nth-child(8){animation-delay:3s;}
+.message-content p:nth-child(9){animation-delay:3.4s;}
+.message-content p:nth-child(10){animation-delay:3.8s;}
+.message-content p:nth-child(11){animation-delay:4.2s;}
 
-        @keyframes imageFadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
+@keyframes fadeInUp {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
 
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 640px) {
-            .card-container {
-                padding: 1.5rem;
-            }
-            .message-content {
-                font-size: 1rem;
-                line-height: 1.8;
-            }
-        }
+.signature {
+  font-size: 1.6rem;
+  color: #e11d48;
+  margin-top: 2rem;
+  font-family: 'Dancing Script', cursive;
+  text-shadow: 1px 1px 8px rgba(255,0,76,0.5);
+  animation: glow 2s infinite alternate;
+}
 
-        /* Decorative heart animation */
-        .heart-decoration {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 30px;
-            height: 30px;
-            background-color: #ef4444;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            animation: heart-beat 1.5s infinite ease-in-out;
-            opacity: 0.8;
-            z-index: -1;
-        }
-        .heart-decoration::before, .heart-decoration::after {
-            content: '';
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #ef4444;
-        }
-        .heart-decoration::before {
-            top: -15px;
-            left: 0;
-        }
-        .heart-decoration::after {
-            top: 0;
-            left: 15px;
-        }
+@keyframes glow {
+  from { text-shadow:0 0 8px #ff3b6a,0 0 15px #ff3b6a; }
+  to { text-shadow:0 0 20px #ff3b6a,0 0 30px #ff3b6a; }
+}
 
-        @keyframes heart-beat {
-            0% { transform: translate(-50%, -50%) rotate(-45deg) scale(0.8); opacity: 0.8; }
-            50% { transform: translate(-50%, -50%) rotate(-45deg) scale(1.1); opacity: 1; }
-            100% { transform: translate(-50%, -50%) rotate(-45deg) scale(0.8); opacity: 0.8; }
-        }
-    </style>
+/* Floating hearts */
+.floating-heart {
+  position:absolute;
+  bottom:-50px;
+  width:20px; height:20px;
+  background:#ff3b6a;
+  opacity:0.8;
+  transform: rotate(-45deg) scale(1);
+  animation: float 7s infinite ease-in, colorChange 5s infinite linear;
+}
+.floating-heart::before, .floating-heart::after {
+  content:'';
+  position:absolute;
+  width:20px; height:20px;
+  background:inherit;
+  border-radius:50%;
+}
+.floating-heart::before {top:-10px; left:0;}
+.floating-heart::after {top:0; left:10px;}
+
+@keyframes float {
+  0% {transform: translateY(0) scale(0.9) rotate(-45deg); opacity:0.7;}
+  50% {transform: translateY(-400px) scale(1.2) rotate(-45deg); opacity:1;}
+  100% {transform: translateY(-800px) scale(1) rotate(-45deg); opacity:0;}
+}
+
+@keyframes colorChange {
+  0% {background:#ff3b6a;}
+  33% {background:#d946ef;}
+  66% {background:#ef4444;}
+  100% {background:#ff3b6a;}
+}
+
+/* Typewriter effect */
+.typewriter {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #8B5CF6;
+  text-align: center;
+  overflow:hidden;
+  white-space:nowrap;
+  margin: 0 auto;
+  letter-spacing:2px;
+  animation: typing 4s steps(20,end);
+}
+@keyframes typing { from{width:0;} to{width:100%;} }
+
+/* Music bars */
+.music-bars {
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:5px;
+}
+.music-bars div {
+  width:5px;
+  height:20px;
+  background:#FF1493;
+  animation: bounceBar 1s infinite ease-in-out;
+}
+.music-bars div:nth-child(2){animation-delay:0.2s;}
+.music-bars div:nth-child(3){animation-delay:0.4s;}
+.music-bars div:nth-child(4){animation-delay:0.6s;}
+.music-bars div:nth-child(5){animation-delay:0.8s;}
+@keyframes bounceBar {
+  0%,100%{height:20px;}
+  50%{height:50px;}
+}
+</style>
 </head>
 <body>
 
+<!-- Floating hearts -->
+<div class="floating-heart" style="left:10%; animation-delay:0s;"></div>
+<div class="floating-heart" style="left:25%; animation-delay:2s;"></div>
+<div class="floating-heart" style="left:45%; animation-delay:4s;"></div>
+<div class="floating-heart" style="left:65%; animation-delay:1s;"></div>
+<div class="floating-heart" style="left:85%; animation-delay:3s;"></div>
+
 <div class="card-container">
-    <div class="heart-decoration"></div>
 
-    <!-- Image for the card. You can replace this placeholder with your own image URL. -->
-    <div class="image-container">
-        <img src="My.jpg" alt="A beautiful image of a couple in a loving pose.">
-    </div>
-    
-    <!-- Title and message content -->
-    <div class="ribbon text-4xl font-bold text-pink-600 mb-4 font-['Dancing Script'] heart-pulse">
-        Happy Birthday
-    </div>
-    <div class="text-3xl font-bold text-gray-800 mb-8">My Everything</div>
+  <!-- Image Slider -->
+  <div class="image-slider">
+    <img src="image 1.jpg" class="active" alt="">
+    <img src="image 2.jpg" alt="">
+    <img src="image 3.jpg" alt="">
+    <!-- Add more images as needed -->
+  </div>
 
-    <div class="message-content">
-        <p>Jaise-jaise yeh waqt aur lamhe aage badhte gaye, waise waise tumse mera pyaar aur gehra hota gaya। Thank you, Krishna, jo tum meri zindagi mein aai। Tumne aakar mujhe adhoora se poora kar diya। Tumhe paake aisa lagta hai jaise ab zindagi chahe jaaisi bhi ho, bas tum ho toh sab kuch khubsurat hai।</p>
-        <p>Humne saath mein ladte-jhagadte, muskurate-rote hue apne rishte ko ek shape diya hai। Hamara pyaar hi hai jo isse mazboot banaya hai।</p>
-        <p>Kaash main tumhe abhi gale se laga pata aur keh pata ki “tumhari saansein jahan chalengi, wahan hi mujhe rehna hai।” Har mulaqat tumse ek haseen yaad ban jaati hai, aur tumhari muskaan meri zindagi ki sabse khoobsurat chiz hai।</p>
-        <p>Thank you meri jaan, mujhe jaise gadhe se pyaar karne ke liye। Tumne sirf mere dil mein ghar hi nahi banaya, balki ek mahal basa liya hai jahan tum humesha meri raani banke rehti ho।</p>
-        <p>Duniya mein kuch bhi ho jaye, par jab main tumhare paas hota hoon toh lagta hai jaise ghar aagya hoon। Tumhari chhoti chhoti badmashiyan aur tumhari muskaan mere saare gham khatm krdeti hai।</p>
-        <p>Kaash abhi tum meri bahon mein hoti aur main dheere-dheere tumhe apne kareeb khinch leta, bss khoya rehta tum mein। Sirf tum aur main, aur koi nahi।</p>
-        <p>Main tumhe aur kaise bataun ki main tumhe kitna chahta hoon? Tum meri nigahon mein, mere khaylon mein mere dil ki dhadkanon mein ho har pal mein ho, har soch tumse hi shuru hoti hai aur tumse hi khatam।</p>
-        <p>Mera dil pagala sa gaya hai jo sirf tumhara naam hi leta hai…</p>
-        <p class="text-3xl font-bold md:text-4xl text-center text-pink-600 my-4">“आराधना…आराधना…”💕</p>
-        <p>Bas tum meri nazron ke samne raho, toh mujhe aur kuch nahi chahiye। Tum meri duniya ho, meri dil ki awaz ho, meri muskaan, meri dhadkan।</p>
-        <p>Hum dono ek dusre k liye bane hai।</p>
-    </div>
-    
-    <div class="signature">
-        <p>Happy Birthday once again, meri आराधना। Tum meri humesha mere dil mein rahogi।</p>
-    </div>
+  <!-- Title -->
+  <div class="text-5xl font-bold text-pink-600 mb-4 font-['Playfair Display'] animate-pulse">
+    Happy Birthday
+  </div>
+  <div class="text-3xl font-bold text-gray-800 mb-8">My Everything 💖</div>
+
+  <!-- Message -->
+  <div class="message-content">
+   <p>Jaise-jaise yeh waqt aur lamhe aage badhte gaye, waise waise tumse mera pyaar aur gehra hota gaya। Thank you, Krishna, jo tum meri zindagi mein aai। Tumne aakar mujhe adhoora se poora kar diya। Tumhe paake aisa lagta hai jaise ab zindagi chahe jaaisi bhi ho, bas tum ho toh sab kuch khubsurat hai।</p>
+    <p>Humne saath mein ladte-jhagadte, muskurate-rote hue apne rishte ko ek shape diya hai। Hamara pyaar hi hai jo isse mazboot banaya hai।</p>
+    <p>Kaash main tumhe abhi gale se laga pata aur keh pata ki “tumhari saansein jahan chalengi, wahan hi mujhe rehna hai।” Har mulaqat tumse ek haseen yaad ban jaati hai, aur tumhari muskaan meri zindagi ki sabse khoobsurat chiz hai।</p>
+    <p>Thank you meri jaan, mujhe jaise gadhe se pyaar karne ke liye। Tumne sirf mere dil mein ghar hi nahi banaya, balki ek mahal basa liya hai jahan tum humesha meri raani banke rehti ho।</p>
+    <p>Duniya mein kuch bhi ho jaye, par jab main tumhare paas hota hoon toh lagta hai jaise ghar aagya hoon। Tumhari chhoti chhoti badmashiyan aur tumhari muskaan mere saare gham khatm krdeti hai।</p>
+    <p>Kaash abhi tum meri bahon mein hoti aur main dheere-dheere tumhe apne kareeb khinch leta, bss khoya rehta tum mein। Sirf tum aur main, aur koi nahi।</p>
+    <p>Main tumhe aur kaise bataun ki main tumhe kitna chahta hoon? Tum meri nigahon mein, mere khaylon mein mere dil ki dhadkanon mein ho har pal mein ho, har soch tumse hi shuru hoti hai aur tumse hi khatam।</p>
+    <p>Mera dil pagala sa gaya hai jo sirf tumhara naam hi leta hai…</p>
+
+    <!-- Typewriter Line -->
+    <div class="typewriter">“आराधना…आराधना…”💕</div>
+
+    <p>Bas tum meri nazron ke samne raho, toh mujhe aur kuch nahi chahiye। Tum meri duniya ho, meri dil ki awaz ho, meri muskaan, meri dhadkan।</p>
+    <p>Hum dono ek dusre k liye bane hai।</p>
+  </div>
+
+  <!-- Signature -->
+  <div class="signature">
+    Happy Birthday once again, meri आराधना 
+    ❤️ With Love
+  </div>
 </div>
+
+<!-- Music Bars -->
+<div class="music-bars">
+  <div></div><div></div><div></div><div></div><div></div>
+</div>
+
+<!-- Music -->
+<audio id="bg-music" autoplay></audio>
+<div style="position:fixed; top:10px; right:10px; font-size:2rem; cursor:pointer;" onclick="toggleMusic()">🎵</div>
+
+<script>
+  // Image Slider
+  const slides = document.querySelectorAll('.image-slider img');
+  let index = 0;
+  setInterval(() => {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+  }, 4000); // change every 4s
+
+  // Music Playlist
+  const playlist = ["music 1.mp3","music 2.mp3","music 3.mp3"]; // replace with your files
+  let current = 0;
+  const music = document.getElementById('bg-music');
+  music.src = playlist[current];
+  music.play();
+
+  music.addEventListener('ended',()=>{
+    current++;
+    if(current>=playlist.length) current=0;
+    music.src = playlist[current];
+    music.play();
+  });
+
+  function toggleMusic(){
+    if(music.paused){ music.play(); } else { music.pause(); }
+  }
+
+  // Click hearts effect
+  document.body.addEventListener('click', function(e){
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.style.left = e.clientX+'px';
+    heart.style.bottom='20px';
+    heart.style.width='15px';
+    heart.style.height='15px';
+    heart.style.animationDuration = 6 + Math.random()*3 + 's';
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),7000);
+  });
+</script>
 
 </body>
 </html>
